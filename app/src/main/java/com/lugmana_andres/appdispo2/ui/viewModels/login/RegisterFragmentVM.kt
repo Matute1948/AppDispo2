@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.lugmana_andres.appdispo2.logic.login.CreateUserWithNameAndPassword
 import com.lugmana_andres.appdispo2.ui.core.UIStates
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.launch
 
@@ -31,7 +32,7 @@ class RegisterFragmentVM : ViewModel() {
                         uiState.postValue(UIStates.Error(it.message.toString()))
                     }
                 }
-
+            delay(500)
             uiState.postValue(UIStates.Loading(false))
         }
     }

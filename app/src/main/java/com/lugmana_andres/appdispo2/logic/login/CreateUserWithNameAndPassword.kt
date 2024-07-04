@@ -11,8 +11,9 @@ import kotlin.Result
 
 class CreateUserWithNameAndPassword(private val context: Context) {
     fun invoke(name:String, password: String) = flow{
-        val con = DataBaseRepository.getDBConnection(context)
-        con.getUserDao().saveUser(
+        kotlinx.coroutines.delay(3000)
+        DataBaseRepository.getDBConnection(context)
+            .getUserDao().saveUser(
             listOf(
                 UsersDB(
                     0,

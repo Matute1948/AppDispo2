@@ -16,6 +16,7 @@ import com.lugmana_andres.appdispo2.data.local.database.entities.UsersDB
 import com.lugmana_andres.appdispo2.data.local.repositories.DataBaseRepository
 import com.lugmana_andres.appdispo2.databinding.FragmentRegisterBinding
 import com.lugmana_andres.appdispo2.logic.login.CreateUserWithNameAndPassword
+import com.lugmana_andres.appdispo2.ui.core.ManageUIStates
 import com.lugmana_andres.appdispo2.ui.core.UIStates
 import com.lugmana_andres.appdispo2.ui.viewModels.login.RegisterFragmentVM
 import kotlinx.coroutines.Dispatchers
@@ -25,6 +26,7 @@ class RegisterFragment : Fragment() {
 
     private lateinit var binding : FragmentRegisterBinding
     private val registerFragmentVM : RegisterFragmentVM by viewModels()
+    private lateinit var managerUIStates: ManageUIStates
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,43 +41,20 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initVariables()
         initListeners()
         initObservers()
     }
 
+    private fun initVariables() {
+        managerUIStates = ManageUIStates(requireActivity(), binding.lytLoading.mainLayout)
+    }
+
     private fun initObservers() {
-        registerFragmentVM.uiState.observe(viewLifecycleOwner){ state ->
-            when(state){
-                is UIStates.Loading -> {
-                    if(state.isLoading){
-                        binding.lytLoading.mainLayout.visibility = View.VISIBLE
-                    }else{
-                        binding.lytLoading.mainLayout.visibility = View.GONE
-                    }
-                }
-                is UIStates.Error -> {
-                    MaterialAlertDialogBuilder(
-                        requireActivity(),
-                        com.google.android.material.R.style.ThemeOverlay_Material3_Dialog_Alert
-                    )
-                        .setTitle("Error")
-                        .setMessage(state.message)
-                        .setPositiveButton("Aceptar") { dialog, id ->
-                            dialog.dismiss()
-                        }
-                }
-                is UIStates.Success -> {
-                    MaterialAlertDialogBuilder(requireActivity(), com.google.android.material.R.style.ThemeOverlay_Material3_Dialog_Alert)//aqui van los estilos del alertdialog)
-                        .setTitle("Existoso")
-                        .setMessage("La operacion fue exitosa. ")
-                        .setPositiveButton("Aceptar"){ dialog, id ->
-                            //aqui se puede poner esta seguro de guardar el usaruio y de ahi si guarda despues de poner aceptar
-                            dialog.dismiss()
-                        }
-                        .show()
-                }
-            }
+        registerFragmentVM.uiState.observe(viewLifecycleOwner) { state ->
+            managerUIStates.invoke(state)
         }
+
     }
 
     private fun initListeners() {
@@ -85,12 +64,24 @@ class RegisterFragment : Fragment() {
         }
         binding.btnRegister.setOnClickListener{
 
-            lifecycleScope.launch {
-                registerFragmentVM.saveUser(
-                    binding.txtNewUser.text.toString(),
-                    binding.txtNewPass.text.toString(),
-                    requireContext())
-            }
+            MaterialAlertDialogBuilder(requireActivity())//aqui van los estilos del alertdialog)
+                .setTitle("Aviso")
+                .setMessage("¿Está usted seguro de envíar esta información?")
+                .setPositiveButton("Si"){ dialog, id ->
+                    //aqui se puede poner esta seguro de guardar el usaruio y de ahi si guarda despues de poner aceptar
+                    lifecycleScope.launch {
+                        registerFragmentVM.saveUser(
+                            binding.txtNewUser.text.toString(),
+                            binding.txtNewPass.text.toString(),
+                            requireContext())
+                    }
+                    dialog.dismiss()
+                }
+                .setNegativeButton("No"){ dialog, id ->
+                    dialog.cancel()
+                }
+                .show()
+
 
         }
 
