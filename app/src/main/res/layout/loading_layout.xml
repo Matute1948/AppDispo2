@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/reloj"
+        app:lottie_rawRes="@raw/bola"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:visibility="visible"/>
