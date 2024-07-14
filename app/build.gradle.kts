@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.safeArgs)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -68,6 +69,10 @@ dependencies {
     implementation(libs.activityKtx)
     implementation(libs.viewModelKtx)
     implementation(libs.liveDataKtx)
+
+    implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-auth-ktx")
 
 
 }

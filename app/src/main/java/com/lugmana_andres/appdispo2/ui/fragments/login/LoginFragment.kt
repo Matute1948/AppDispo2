@@ -12,6 +12,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import com.lugmana_andres.appdispo2.R
 import com.lugmana_andres.appdispo2.databinding.FragmentLoginBinding
 import com.lugmana_andres.appdispo2.databinding.FragmentRecoveryBinding
@@ -30,6 +33,8 @@ class LoginFragment : Fragment() {
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
     private lateinit var biometricManager: BiometricManager
+
+    private lateinit var auth: FirebaseAuth
 
 
     override fun onCreateView(
@@ -55,6 +60,18 @@ class LoginFragment : Fragment() {
             requireContext(),
             binding.lytLoading.mainLayout
         )
+        // Initialize Firebase Auth
+        auth = Firebase.auth
+
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            startActivity(
+                Intent(
+                    requireActivity(),
+                    MainActivity::class.java
+                )
+            )
+        }
     }
 
     private fun initObservers() {
