@@ -1,4 +1,4 @@
-package com.lugmana_andres.appdispo2.ui.fragments.main
+package com.lugmana_andres.appdispo2.ui.fragments.main.cartas
 
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lugmana_andres.appdispo2.R
 import com.lugmana_andres.appdispo2.databinding.FragmentListaAllCartasBinding
-import com.lugmana_andres.appdispo2.databinding.FragmentLoginBinding
 import com.lugmana_andres.appdispo2.ui.adapter.ListaAllCartasAdapter
 import com.lugmana_andres.appdispo2.ui.core.ManageUIStates
 import com.lugmana_andres.appdispo2.ui.viewModels.main.ListaAllCartasVM

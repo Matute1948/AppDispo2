@@ -3,4 +3,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_subrayado"><u>¿No tienes una cuenta?</u> Registrate</string>
+    <string name="text_Perfil">Perfil</string>
+    <string name="text_Cartas">Cartas</string>
+    <string name="text_Clanes">Clan</string>
+    <string name="text_Informacion">Info</string>
 </resources>

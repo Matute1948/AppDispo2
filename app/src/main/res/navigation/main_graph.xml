@@ -3,11 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/listaAllCartasFragment">
+    app:startDestination="@id/perfilFragment">
 
     <fragment
+        android:id="@+id/perfilFragment"
+        android:name="com.lugmana_andres.appdispo2.ui.fragments.main.perfil.PerfilFragment"
+        android:label="fragment_perfil"
+        tools:layout="@layout/fragment_perfil" >
+        <action
+            android:id="@+id/action_perfilFragment_to_listaAllCartasFragment"
+            app:destination="@id/listaAllCartasFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/clanesFragment"
+        android:name="com.lugmana_andres.appdispo2.ui.fragments.main.clanes.ClanesFragment"
+        android:label="fragment_clanes"
+        tools:layout="@layout/fragment_clanes" >
+        <action
+            android:id="@+id/action_clanesFragment_to_informacionFragment"
+            app:destination="@id/informacionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/informacionFragment"
+        android:name="com.lugmana_andres.appdispo2.ui.fragments.main.infor.InformacionFragment"
+        android:label="fragment_informacion"
+        tools:layout="@layout/fragment_informacion" />
+    <fragment
         android:id="@+id/listaAllCartasFragment"
-        android:name="com.lugmana_andres.appdispo2.ui.fragments.main.ListaAllCartasFragment"
+        android:name="com.lugmana_andres.appdispo2.ui.fragments.main.cartas.ListaAllCartasFragment"
         android:label="fragment_lista_all_cartas"
-        tools:layout="@layout/fragment_lista_all_cartas" />
+        tools:layout="@layout/fragment_lista_all_cartas" >
+        <action
+            android:id="@+id/action_listaAllCartasFragment_to_clanesFragment"
+            app:destination="@id/clanesFragment" />
+    </fragment>
 </navigation>
