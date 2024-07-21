@@ -1,4 +1,4 @@
-package com.lugmana_andres.appdispo2.logic.main
+package com.lugmana_andres.appdispo2.logic.main.perfil
 
 import android.util.Log
 import com.example.appandres.data.network.endpoints.CartasEndPoint
@@ -16,8 +16,6 @@ class GetAllCartasUserCase {
         var response = RetrofitBase.returnBaseRetrofitClash()
             .create(CartasEndPoint::class.java)
             .getAllCartas()
-
-
         if (response.isSuccessful){
             //el body nos devuelve la data
             val x = response.body()?.items

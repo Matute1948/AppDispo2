@@ -1,10 +1,9 @@
-package com.example.appandres.data.network.entity.allCartas
+package com.lugmana_andres.appdispo2.data.network.entities.infoJugadorEntity
 
-data class Item(
+data class CurrentFavouriteCard(
     val elixirCost: Int,
     val iconUrls: IconUrls,
     val id: Int,
-    val maxEvolutionLevel: Int,
     val maxLevel: Int,
     val name: String,
     val rarity: String

@@ -1,6 +1,6 @@
 package com.example.appandres.data.network.endpoints
 
-import com.example.appandres.data.network.entity.allCartas.ApiAllCartas
+import com.lugmana_andres.appdispo2.data.network.entities.cartas.ApiAllCartas
 import retrofit2.Response
 import retrofit2.http.GET
 

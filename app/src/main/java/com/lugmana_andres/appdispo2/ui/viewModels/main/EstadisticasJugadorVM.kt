@@ -4,26 +4,26 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lugmana_andres.appdispo2.logic.main.perfil.GetAllCartasUserCase
+import com.lugmana_andres.appdispo2.logic.main.perfil.GetInfoJugadorUserCase
 import com.lugmana_andres.appdispo2.ui.core.UIStates
-import com.lugmana_andres.appdispo2.ui.entity.clashRoyale.CartasUI
+import com.lugmana_andres.appdispo2.ui.entity.perfil.EstadisticasInfoJugadorUI
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class ListaAllCartasVM : ViewModel(){
-    val itemCarta = MutableLiveData<List<CartasUI>>()
+class EstadisticasJugadorVM : ViewModel(){
+    val itemEstadisticas = MutableLiveData<EstadisticasInfoJugadorUI>()
     val uiState = MutableLiveData<UIStates>()
 
-    fun initData(){
-        Log.d("TAG", "Ingresando al VM")
+    fun init(playerTag : String){
+        Log.d("TAG", "Ingresando al VM Estadisticas")
         viewModelScope.launch {
             uiState.postValue(UIStates.Loading(true))
-            GetAllCartasUserCase().invoke().collect{ respAC ->
-                respAC.onSuccess { items ->
-                    itemCarta.postValue(items)
+            GetInfoJugadorUserCase().invoke(playerTag).collect{
+                it.onSuccess {
+                    itemEstadisticas.postValue(it)
                 }
 
-                respAC.onFailure {
+                it.onFailure {
                     uiState.postValue(UIStates.Error(it.message.toString()))
                     Log.d("TAG", it.message.toString())
                 }
@@ -31,6 +31,8 @@ class ListaAllCartasVM : ViewModel(){
 
             delay(1000)
             uiState.postValue(UIStates.Loading(false))
+
         }
     }
+
 }
