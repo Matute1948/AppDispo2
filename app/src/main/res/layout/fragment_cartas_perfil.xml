@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:layout_marginTop="5dp">
 
         <!-- Botón para ordenar por nivel -->
         <Button
@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
-            android:text="Nivel"/>
+            android:text="Nivel" />
 
         <!-- Botón para ordenar por calidad -->
         <Button
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
-            android:text="Calidad"/>
+            android:text="Calidad" />
 
         <!-- Botón para alternar orden -->
         <Button
@@ -36,18 +36,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
-            android:text="Asc"/>
+            android:text="Orden" />
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp">
+        android:layout_margin="5dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcCartaJugador"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
     </androidx.cardview.widget.CardView>
 

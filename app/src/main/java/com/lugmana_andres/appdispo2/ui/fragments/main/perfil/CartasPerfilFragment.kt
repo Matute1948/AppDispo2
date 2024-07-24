@@ -50,6 +50,17 @@ class CartasPerfilFragment : Fragment() {
     }
 
     private fun initListeners() {
+        binding.btnOrdenarNivel.setOnClickListener {
+            cartasJugadorVM.ordenarPorNivel()
+        }
+
+        binding.btnOrdenarCalidad.setOnClickListener {
+            cartasJugadorVM.ordenarPorCalidad()
+        }
+
+        binding.btnOrdenAscDesc.setOnClickListener {
+            cartasJugadorVM.alternarOrden()
+        }
 
     }
     private fun initObservers() {

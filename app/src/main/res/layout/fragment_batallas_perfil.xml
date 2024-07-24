@@ -13,7 +13,7 @@
         android:layout_margin="10dp"
         app:cardElevation="4dp"
         app:cardCornerRadius="8dp"
-        android:backgroundTint="@color/black">
+        android:backgroundTint="@color/blue">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcBatallasJugador"

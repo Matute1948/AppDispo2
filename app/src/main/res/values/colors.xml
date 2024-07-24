@@ -2,10 +2,23 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="redd">#C13243</color>
+    <color name="red">#C13243</color>
     <color name="blue">#266CA8</color>
     <color name="turquesa">#00BCD4</color>
     <color name="playerBackground">#E0F7FA</color>
     <color name="rivalBackground">#FFEBEE</color>
 
+    <color name="comun_highlight_color">#92138BEB</color> <!-- Azul claro -->
+    <color name="comun_text_color">#60D0F6</color> <!-- Celeste -->
+
+    <color name="especial_highlight_color">#91FFA500</color> <!-- Naranja -->
+    <color name="especial_text_color">#FFD17B</color> <!-- Naranja más claro -->
+
+    <color name="epico_highlight_color">#91800080</color> <!-- Morado -->
+    <color name="epico_text_color">#DB85D7</color> <!-- Morado claro -->
+
+    <color name="legendario_highlight_color">#9165AF9D</color> <!-- Color arcoíris -->
+
+    <color name="campeon_highlight_color">#91EDC733</color> <!-- Amarillo -->
+    <color name="campeon_text_color">#D9E022</color> <!-- Dorado -->
 </resources>

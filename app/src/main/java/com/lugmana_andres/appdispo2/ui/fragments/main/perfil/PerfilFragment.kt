@@ -23,7 +23,6 @@ class PerfilFragment : Fragment() {
     private lateinit var manageUIStates: ManageUIStates
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,7 +51,6 @@ class PerfilFragment : Fragment() {
     private fun render(item : BannerInfoJugadorUI) {
 
         binding.txtNameJugador.text = item.nombreJugador
-        binding.txtTag.text = item.tagJugador
         binding.txtNivel.text = item.nivelJugadir.toString()
         binding.txtClanNom.text = item.nombreClan
         binding.txtRolClan.text = item.rolClan
@@ -67,7 +65,6 @@ class PerfilFragment : Fragment() {
         bannerJugadorVM.banner.observe(viewLifecycleOwner) { bannerInfo ->
             render(bannerInfo)
         }
-
     }
 
     private fun initData() {

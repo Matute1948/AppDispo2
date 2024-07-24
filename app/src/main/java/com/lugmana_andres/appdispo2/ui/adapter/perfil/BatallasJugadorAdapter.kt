@@ -3,6 +3,8 @@ package com.lugmana_andres.appdispo2.ui.adapter.perfil
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ListAdapter
@@ -26,14 +28,23 @@ class BatallasJugadorAdapter :
             "Cannoneer" to (R.drawable.canonero)
         )
         fun render(item : BatallasJugadorUI){
+
+            val context = binding.root.context  // Obtener el contexto desde la vista raíz
             val adapterJugador = MazoBatallasAdapter(item.jugador.get(0).cartasJugador)
             val adapterRival = MazoBatallasAdapter(item.rival.get(0).cartasRival)
-            binding.txtNameJugador.text = item.jugador.get(0).nombreJuga
-            binding.txtClanJugador.text = item.jugador.get(0).nombreClan
-            binding.txtNumCoroJuga.text = item.jugador.get(0).nomCoronasJuga.toString()
-            binding.txtNameRival.text = item.rival.get(0).nomRival
-            binding.txtClanRival.text = item.rival.get(0).nomClan
-            binding.txtNumCoroRival.text = item.rival.get(0).numCoronasRiva.toString()
+            binding.txtNameJugador.text = item.jugador[0].nombreJuga
+            binding.txtClanJugador.text = item.jugador[0].nombreClan
+            binding.txtNumCoroJuga.text = item.jugador[0].nomCoronasJuga.toString()
+            binding.txtNameRival.text = item.rival[0].nomRival
+            binding.txtClanRival.text = item.rival[0].nomClan
+            binding.txtNumCoroRival.text = item.rival[0].numCoronasRiva.toString()
+            if (item.jugador[0].nomCoronasJuga>item.rival[0].numCoronasRiva){
+                binding.txtResultado.text = "Victoria"
+                binding.txtResultado.setTextColor(ContextCompat.getColor(context,R.color.blue))
+            }else{
+                binding.txtResultado.text = "Derrota"
+                binding.txtResultado.setTextColor(ContextCompat.getColor(context, R.color.red))
+            }
             torres[item.jugador.get(0).nomTorreJuga]?.let {
                 binding.imgTorreJugador.load(it)
             }
