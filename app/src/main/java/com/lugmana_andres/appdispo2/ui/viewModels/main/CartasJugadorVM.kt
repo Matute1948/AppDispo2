@@ -4,26 +4,29 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lugmana_andres.appdispo2.logic.main.perfil.info.GetInfoJugadorUserCase
+import com.lugmana_andres.appdispo2.logic.main.perfil.GetCartasJugadorUserCase
 import com.lugmana_andres.appdispo2.ui.core.UIStates
-import com.lugmana_andres.appdispo2.ui.entity.perfil.EstadisticasInfoJugadorUI
+import com.lugmana_andres.appdispo2.ui.entity.perfil.MazoUsualUI
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class EstadisticasJugadorVM : ViewModel(){
-    val itemEstadisticas = MutableLiveData<EstadisticasInfoJugadorUI>()
+class CartasJugadorVM : ViewModel() {
+
+    val cartasJugador = MutableLiveData<List<MazoUsualUI>>()
     val uiState = MutableLiveData<UIStates>()
 
-    fun init(playerTag : String){
-        Log.d("TAG", "Ingresando al VM Estadisticas")
+    fun initData(playerTag: String) {
+        Log.d("TAG", "Ingresando al VM Cartas jugador")
         viewModelScope.launch {
             uiState.postValue(UIStates.Loading(true))
-            GetInfoJugadorUserCase().invoke(playerTag).collect{
-                it.onSuccess {
-                    itemEstadisticas.postValue(it)
+            GetCartasJugadorUserCase().invoke(playerTag).collect { respAC ->
+
+                respAC.onSuccess {
+                    cartasJugador.postValue(it)
+
                 }
 
-                it.onFailure {
+                respAC.onFailure {
                     uiState.postValue(UIStates.Error(it.message.toString()))
                     Log.d("TAG", it.message.toString())
                 }
@@ -32,7 +35,9 @@ class EstadisticasJugadorVM : ViewModel(){
             delay(1000)
             uiState.postValue(UIStates.Loading(false))
 
+
         }
+
     }
 
 }

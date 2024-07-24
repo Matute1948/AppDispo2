@@ -1,7 +1,11 @@
 package com.lugmana_andres.appdispo2.ui.activitys
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import com.lugmana_andres.appdispo2.R
@@ -18,12 +22,22 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        setImmersiveMode()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initListeners()
-        val x = supportFragmentManager.beginTransaction()
-        x.replace(binding.containerFragments.id, PerfilFragment())
-        x.commit()
+
+        // Cargar el fragmento inicial
+        supportFragmentManager.beginTransaction()
+            .replace(binding.containerFragments.id, PerfilFragment())
+            .commit()
+
+        // Configura los Insets para el BottomNavigationView
+        ViewCompat.setOnApplyWindowInsetsListener(binding.bottomNavigation) { view, insets ->
+            insets
+        }
     }
 
     private fun initListeners() {
@@ -56,6 +70,38 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+    }
+
+    private fun setImmersiveMode() {
+        val decorView = window.decorView
+        decorView.systemUiVisibility = (
+                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_FULLSCREEN
+                )
+
+        // Configura un listener para restaurar el modo inmersivo si cambia la visibilidad del sistema
+        decorView.setOnSystemUiVisibilityChangeListener { visibility ->
+            if (visibility and View.SYSTEM_UI_FLAG_FULLSCREEN == 0) {
+                decorView.systemUiVisibility = (
+                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                                or View.SYSTEM_UI_FLAG_FULLSCREEN
+                        )
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Configura el modo inmersivo cada vez que la actividad se reanude
+        setImmersiveMode()
     }
 
 

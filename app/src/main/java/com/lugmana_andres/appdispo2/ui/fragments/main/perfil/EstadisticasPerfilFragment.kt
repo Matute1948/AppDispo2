@@ -11,12 +11,14 @@ import com.lugmana_andres.appdispo2.R
 import com.lugmana_andres.appdispo2.databinding.FragmentEstadisticasPerfilBinding
 import com.lugmana_andres.appdispo2.ui.adapter.perfil.EstadisticasPerfilJugadorAdapter
 import com.lugmana_andres.appdispo2.ui.core.ManageUIStates
+import com.lugmana_andres.appdispo2.ui.viewModels.main.CicloCofresVM
 import com.lugmana_andres.appdispo2.ui.viewModels.main.EstadisticasJugadorVM
 
 class EstadisticasPerfilFragment : Fragment() {
 
     private lateinit var binding : FragmentEstadisticasPerfilBinding
     private val estadisticasJuadorVM : EstadisticasJugadorVM by viewModels()
+    private val ciclosCofreVM : CicloCofresVM by viewModels()
     private lateinit var manageUIStates: ManageUIStates
     private lateinit var adapter : EstadisticasPerfilJugadorAdapter
 
@@ -56,14 +58,21 @@ class EstadisticasPerfilFragment : Fragment() {
                 adapter.setItem(it)
             }
         }
+        ciclosCofreVM.cicloCofreVM.observe(viewLifecycleOwner){
+            adapter.setItemCofres(it)
+        }
 
         estadisticasJuadorVM.uiState.observe(viewLifecycleOwner){
             manageUIStates.invoke(it)
         }
+
+
+
     }
 
     private fun initData() {
         estadisticasJuadorVM.init("#2U20LR9U8")
+        ciclosCofreVM.initData("#2U20LR9U8")
 
     }
 

@@ -1,20 +1,27 @@
 package com.lugmana_andres.appdispo2.ui.core
 
-import com.lugmana_andres.appdispo2.data.network.entities.cartas.Item
+import com.lugmana_andres.appdispo2.data.network.entities.batallasRecJugadorEntity.BatallasRecJugadorApiItem
+import com.lugmana_andres.appdispo2.data.network.entities.cofresJugadorEntity.Item
+import com.lugmana_andres.appdispo2.data.network.entities.infoJugadorEntity.Card
 import com.lugmana_andres.appdispo2.data.network.entities.infoJugadorEntity.InfoJugadorAPI
-import com.lugmana_andres.appdispo2.ui.entity.clashRoyale.CartasUI
 import com.lugmana_andres.appdispo2.ui.entity.perfil.BannerInfoJugadorUI
+import com.lugmana_andres.appdispo2.ui.entity.perfil.BatallasJugadorUI
+import com.lugmana_andres.appdispo2.ui.entity.perfil.CofresJugadorUI
 import com.lugmana_andres.appdispo2.ui.entity.perfil.EstadisticasInfoJugadorUI
 import com.lugmana_andres.appdispo2.ui.entity.perfil.InsigniaUI
+import com.lugmana_andres.appdispo2.ui.entity.perfil.JugadorPerfilUI
 import com.lugmana_andres.appdispo2.ui.entity.perfil.MazoUsualUI
+import com.lugmana_andres.appdispo2.ui.entity.perfil.RivalPerfilUI
+import okhttp3.internal.notify
 
 
-fun Item.toCartasUI() = CartasUI (
+fun Card.toCartasUI() = MazoUsualUI (
         id = this.id,
-        name = this.name,
+        nombre = this.name,
         costo = this.elixirCost,
         calidad = this.rarity,
-        imagen = this.iconUrls.medium
+        imagen = this.iconUrls.medium,
+        nivel = this.maxLevel
 )
 
 fun InfoJugadorAPI.toBannerInfoJugadorUI () = BannerInfoJugadorUI(
@@ -60,5 +67,27 @@ fun InfoJugadorAPI.toEstadisticasJugadorUI() = EstadisticasInfoJugadorUI(
         numBatallasTorneos = this.tournamentBattleCount,
         numDiaVicGuerra = this.warDayWins,
         cartasReunidasClan = this.clanCardsCollected
+
+)
+
+fun Item.toCofresJugadorUI() = CofresJugadorUI (
+        ciclo = this.index,
+        nombreCofre = this.name
+)
+
+fun BatallasRecJugadorApiItem.toBatallasJugadorUI() = BatallasJugadorUI (
+        nomArena = this.arena.name,
+        modoJuego = this.gameMode.name,
+        liga = this.leagueNumber,
+        jugador = this.team.map {
+                JugadorPerfilUI(it.name,it.crowns,"XD","tagaaa", it.cards.map { car ->
+                        MazoUsualUI(car.id, car.name, car.rarity, car.iconUrls.medium, car.level, car.elixirCost) }
+                ,it.supportCards.get(0).name, it.supportCards.get(0).iconUrls.medium)
+        },
+        rival = this.opponent.map {
+                RivalPerfilUI(it.name,it.tag,it.crowns,"XD","ahhh",it.cards.map { car ->
+                        MazoUsualUI(car.id, car.name, car.rarity, car.iconUrls.medium, car.level, car.elixirCost) }
+                ,it.supportCards.get(0).name,it.supportCards.get(0).iconUrls.medium)
+        }
 
 )

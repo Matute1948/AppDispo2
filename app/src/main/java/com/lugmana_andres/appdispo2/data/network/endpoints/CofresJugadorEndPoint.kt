@@ -6,6 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface CofresJugadorEndPoint {
-    @GET("players/{playerTag}/battlelog")
+    @GET("players/{playerTag}/upcomingchests")
     suspend fun getCofresJugador(@Path("playerTag") playerTag: String): Response<CofresJugadorApi>
 }

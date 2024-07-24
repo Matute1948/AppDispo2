@@ -6,13 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.lugmana_andres.appdispo2.R
+import com.lugmana_andres.appdispo2.databinding.ItemCartasBatallasBinding
 import com.lugmana_andres.appdispo2.databinding.ItemsMazosCartasPerfilBinding
 import com.lugmana_andres.appdispo2.ui.entity.perfil.MazoUsualUI
 
-class MazoRecurrenteAdapter(private val cartas: List<MazoUsualUI>) :
-    RecyclerView.Adapter<MazoRecurrenteAdapter.MazoUsualVH>(){
+class MazoBatallasAdapter(private val cartas: List<MazoUsualUI>) :
+    RecyclerView.Adapter<MazoBatallasAdapter.MazoUsualVH>(){
     class MazoUsualVH(view: View) : RecyclerView.ViewHolder(view)  {
-        private val binding = ItemsMazosCartasPerfilBinding.bind(view)
+        private val binding = ItemCartasBatallasBinding.bind(view)
         fun render(item : MazoUsualUI){
             binding.imageView2.load(item.imagen)
             binding.textLevel.text = "Nivel "+item.nivel
@@ -22,7 +23,7 @@ class MazoRecurrenteAdapter(private val cartas: List<MazoUsualUI>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MazoUsualVH {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.items_mazos_cartas_perfil, parent, false)
+            .inflate(R.layout.item_cartas_batallas, parent, false)
         return MazoUsualVH(view)
     }
 
