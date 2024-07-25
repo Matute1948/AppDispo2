@@ -4,6 +4,10 @@ import com.lugmana_andres.appdispo2.data.network.entities.batallasRecJugadorEnti
 import com.lugmana_andres.appdispo2.data.network.entities.cofresJugadorEntity.Item
 import com.lugmana_andres.appdispo2.data.network.entities.infoJugadorEntity.Card
 import com.lugmana_andres.appdispo2.data.network.entities.infoJugadorEntity.InfoJugadorAPI
+import com.lugmana_andres.appdispo2.data.network.entities.miembrosClanEntity.Member
+import com.lugmana_andres.appdispo2.data.network.entities.miembrosClanEntity.MiembrosClanApi
+import com.lugmana_andres.appdispo2.ui.entity.clan.ClanUI
+import com.lugmana_andres.appdispo2.ui.entity.clan.MiembroUI
 import com.lugmana_andres.appdispo2.ui.entity.perfil.BannerInfoJugadorUI
 import com.lugmana_andres.appdispo2.ui.entity.perfil.BatallasJugadorUI
 import com.lugmana_andres.appdispo2.ui.entity.perfil.CofresJugadorUI
@@ -12,7 +16,6 @@ import com.lugmana_andres.appdispo2.ui.entity.perfil.InsigniaUI
 import com.lugmana_andres.appdispo2.ui.entity.perfil.JugadorPerfilUI
 import com.lugmana_andres.appdispo2.ui.entity.perfil.MazoUsualUI
 import com.lugmana_andres.appdispo2.ui.entity.perfil.RivalPerfilUI
-import okhttp3.internal.notify
 
 
 fun Card.toCartasUI() = MazoUsualUI (
@@ -90,4 +93,25 @@ fun BatallasRecJugadorApiItem.toBatallasJugadorUI() = BatallasJugadorUI (
                 ,it.supportCards.get(0).name,it.supportCards.get(0).iconUrls.medium)
         }
 
+)
+
+fun com.lugmana_andres.appdispo2.data.network.entities.clanEntity.Item.toClanUI() = ClanUI(
+        tagClan = this.tag,
+        nombreClan = this.name,
+        trofeosClan = this.clanScore,
+        guerraClanTro = this.clanWarTrophies,
+        miemebrosClan = this.members,
+        trofeoNecClan = this.requiredTrophies,
+        donaciones = this.donationsPerWeek,
+        lugarClan = this.location.name,
+        clanTipo = this.type
+)
+
+fun Member.toMiembroUI() = MiembroUI(
+        nombreMiem = this.name,
+        tagMiem = this.tag,
+        roelMiem = this.role,
+        donaMiem = this.donations,
+        trofeosMiem = this.trophies,
+        clanRankMiem = this.clanRank
 )

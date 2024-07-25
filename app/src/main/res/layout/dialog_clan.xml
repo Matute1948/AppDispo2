@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:padding="10dp">
+
+    <ImageButton
+        android:id="@+id/btnClose"
+        android:layout_width="22dp"
+        android:layout_height="26dp"
+        android:layout_margin="10dp"
+        android:layout_gravity="fill"
+        android:background="@drawable/sa"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgBadgeClan"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/crown_uno"
+                android:layout_gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginVertical="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtNomClan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Nombre Clan"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtTagClan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tag" />
+
+                <TextView
+                    android:id="@+id/txtPaisClan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pais" />
+
+                <TextView
+                    android:id="@+id/txtTipoClan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tipo" />
+                <TextView
+                    android:id="@+id/txtDonaciones"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tipo" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/datos"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="end"
+                android:gravity="end">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/txtTrofeosClan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="000"
+                        android:layout_marginVertical="12dp"
+                        android:textStyle="bold"
+                        android:gravity="end"
+                        android:layout_gravity="center_vertical|end"/>
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="10dp"
+                        app:srcCompat="@drawable/trofeos_clan"
+                        android:layout_gravity="center_vertical|end"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/txtTrofeosGuerraClan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="000"
+                        android:layout_marginVertical="12dp"
+                        android:textStyle="bold"
+                        android:gravity="end"
+                        android:layout_gravity="center_vertical|end"/>
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="10dp"
+                        app:srcCompat="@drawable/trofeos_clan_guerra"
+                        android:layout_gravity="center_vertical|end"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="10dp">
+        <!-- RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp" />
+    </androidx.cardview.widget.CardView>
+
+    <include
+        android:id="@+id/lytLoading"
+        layout="@layout/loading_layout" />
+
+</LinearLayout>
