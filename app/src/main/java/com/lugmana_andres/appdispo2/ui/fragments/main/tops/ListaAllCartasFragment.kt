@@ -1,4 +1,4 @@
-package com.lugmana_andres.appdispo2.ui.fragments.main.cartas
+package com.lugmana_andres.appdispo2.ui.fragments.main.tops
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

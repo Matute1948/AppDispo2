@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/option1Loca"
+        android:title="Europa"/>
+    <item
+        android:id="@+id/option2Loca"
+        android:title="América del Norte"/>
+    <item
+        android:id="@+id/option3Loca"
+        android:title="América del Sur"/>
+    <item
+        android:id="@+id/option4Loca"
+        android:title="Asia"/>
+    <item
+        android:id="@+id/option5Loca"
+        android:title="Ociania"/>
+    <item
+        android:id="@+id/option6Loca"
+        android:title="Africa"/>
+    <item
+        android:id="@+id/option7Loca"
+        android:title="Internacional"/>
+    <item
+        android:id="@+id/option8Loca"
+        android:title="Argentina"/>
+    <item
+        android:id="@+id/option9Loca"
+        android:title="Australia"/>
+    <item
+        android:id="@+id/option10Loca"
+        android:title="Bolivía"/>
+    <item
+        android:id="@+id/option11Loca"
+        android:title="Brasil"/>
+    <item
+        android:id="@+id/option12Loca"
+        android:title="Canada"/>
+    <item
+        android:id="@+id/option13Loca"
+        android:title="Chile"/>
+    <item
+        android:id="@+id/option14Loca"
+        android:title="China"/>
+    <item
+        android:id="@+id/option15Loca"
+        android:title="Colombia"/>
+    <item
+        android:id="@+id/option16Loca"
+        android:title="Costa Rica"/>
+    <item
+        android:id="@+id/option17Loca"
+        android:title="Ecuador"/>
+    <item
+        android:id="@+id/option18Loca"
+        android:title="El Salvador"/>
+    <item
+        android:id="@+id/option19Loca"
+        android:title="Francia"/>
+    <item
+        android:id="@+id/option21Loca"
+        android:title="Paraguay"/>
+    <item
+        android:id="@+id/option22Loca"
+        android:title="Peru"/>
+    <item
+        android:id="@+id/option23Loca"
+        android:title="Rusia"/>
+    <item
+        android:id="@+id/option24Loca"
+        android:title="España"/>
+    <item
+        android:id="@+id/option25Loca"
+        android:title="Estados Unidos"/>
+    <item
+        android:id="@+id/option26Loca"
+        android:title="Mexico"/>
+
+</menu>

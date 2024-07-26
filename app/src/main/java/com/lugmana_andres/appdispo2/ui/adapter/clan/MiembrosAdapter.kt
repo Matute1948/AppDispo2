@@ -18,6 +18,18 @@ class MiembrosAdapter :
         private val binding = ItemClanLocationBinding.bind(view)
 
         fun render(item : MiembroUI){
+            // Asignar el número de posición
+            binding.txtListClan.text = (position + 1).toString()
+            // Asignar los colores de fondo según la posición
+            val backgroundColor = when (position) {
+                0 -> R.color.color_mostaza
+                1 -> R.color.color_plomo
+                2 -> R.color.color_bronce
+                else -> R.color.listado
+            }
+            binding.txtListClan.setBackgroundColor(
+                binding.txtListClan.context.getColor(backgroundColor)
+            )
             binding.txtNomClan.text = item.nombreMiem
             binding.txtTrofeosClan.text = item.trofeosMiem.toString()
             binding.txtMiemClan.text = item.roelMiem

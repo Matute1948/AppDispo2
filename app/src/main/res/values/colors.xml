@@ -7,6 +7,11 @@
     <color name="turquesa">#00BCD4</color>
     <color name="playerBackground">#E0F7FA</color>
     <color name="rivalBackground">#FFEBEE</color>
+    <color name="listado">#C8C3C4</color>
+
+    <color name="color_mostaza">#FFD700</color>
+    <color name="color_plomo">#949494</color>
+    <color name="color_bronce">#CD7F32</color>
 
     <color name="comun_highlight_color">#92138BEB</color> <!-- Azul claro -->
     <color name="comun_text_color">#60D0F6</color> <!-- Celeste -->

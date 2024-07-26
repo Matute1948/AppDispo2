@@ -9,15 +9,10 @@
         android:id="@+id/item_2_cartas"
         android:enabled="true"
         android:icon="@drawable/swipe_left_alt_24px"
-        android:title="@string/text_Cartas"/>
+        android:title="@string/text_Tops"/>
     <item
         android:id="@+id/item_3_clanes"
         android:enabled="true"
         android:icon="@drawable/swipe_down_alt_24px"
         android:title="@string/text_Clanes"/>
-    <item
-        android:id="@+id/item_4_informacion"
-        android:enabled="true"
-        android:icon="@drawable/swipe_up_alt_24px"
-        android:title="@string/text_Informacion"/>
 </menu>

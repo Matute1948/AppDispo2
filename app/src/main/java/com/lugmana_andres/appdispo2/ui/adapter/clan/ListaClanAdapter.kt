@@ -16,6 +16,18 @@ class ListaClanAdapter(private val onItemClickListener: (ClanUI) -> Unit) :
         private val binding = ItemClanLocationBinding.bind(view)
 
         fun render(item : ClanUI, onItemClickListener: (ClanUI) -> Unit){
+            // Asignar el número de posición
+            binding.txtListClan.text = (position + 1).toString()
+            // Asignar los colores de fondo según la posición
+            val backgroundColor = when (position) {
+                0 -> R.color.color_mostaza
+                1 -> R.color.color_plomo
+                2 -> R.color.color_bronce
+                else -> R.color.listado
+            }
+            binding.txtListClan.setBackgroundColor(
+                binding.txtListClan.context.getColor(backgroundColor)
+            )
             binding.txtNomClan.text = item.nombreClan
             binding.txtTrofeosClan.text = item.trofeosClan.toString()
             binding.txtMiemClan.text = "Miembros: "+item.miemebrosClan.toString()
