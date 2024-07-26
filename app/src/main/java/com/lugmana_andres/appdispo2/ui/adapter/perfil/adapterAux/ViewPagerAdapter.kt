@@ -7,15 +7,16 @@ import com.lugmana_andres.appdispo2.ui.fragments.main.perfil.BatallasPerfilFragm
 import com.lugmana_andres.appdispo2.ui.fragments.main.perfil.CartasPerfilFragment
 import com.lugmana_andres.appdispo2.ui.fragments.main.perfil.EstadisticasPerfilFragment
 
-class ViewPagerAdapter(fm: FragmentActivity) : FragmentStateAdapter(fm) {
+class ViewPagerAdapter(fm: FragmentActivity, var tagAdpa : String) : FragmentStateAdapter(fm) {
 
     override fun getItemCount(): Int = 3 // Número de pestañas
 
     override fun createFragment(position: Int): Fragment {
+
         return when (position) {
-            0 -> EstadisticasPerfilFragment() // Primer fragmento para la pestaña de estadísticas
-            1 -> CartasPerfilFragment() // Segundo fragmento (cambia el nombre según tu diseño)
-            2 -> BatallasPerfilFragment() // Tercer fragmento (cambia el nombre según tu diseño)
+            0 -> EstadisticasPerfilFragment(tagAdpa) // Primer fragmento para la pestaña de estadísticas
+            1 -> CartasPerfilFragment(tagAdpa) // Segundo fragmento (cambia el nombre según tu diseño)
+            2 -> BatallasPerfilFragment(tagAdpa) // Tercer fragmento (cambia el nombre según tu diseño)
             else -> throw IllegalStateException("Unexpected position $position")
         }
     }

@@ -1,6 +1,7 @@
 package com.lugmana_andres.appdispo2.ui.fragments.main.perfil
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +15,7 @@ import com.lugmana_andres.appdispo2.ui.core.ManageUIStates
 import com.lugmana_andres.appdispo2.ui.viewModels.main.CicloCofresVM
 import com.lugmana_andres.appdispo2.ui.viewModels.main.EstadisticasJugadorVM
 
-class EstadisticasPerfilFragment : Fragment() {
+class EstadisticasPerfilFragment(var tagAdpa : String) : Fragment() {
 
     private lateinit var binding : FragmentEstadisticasPerfilBinding
     private val estadisticasJuadorVM : EstadisticasJugadorVM by viewModels()
@@ -70,9 +71,10 @@ class EstadisticasPerfilFragment : Fragment() {
 
     }
 
-    private fun initData() {
-        estadisticasJuadorVM.init("#2U20LR9U8")
-        ciclosCofreVM.initData("#2U20LR9U8")
+     fun initData() {
+         Log.d("TAG","Xd " + tagAdpa)
+        estadisticasJuadorVM.init(tagAdpa)
+        ciclosCofreVM.initData(tagAdpa)
 
     }
 

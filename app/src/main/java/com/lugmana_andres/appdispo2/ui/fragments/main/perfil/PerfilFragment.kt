@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
+
 import androidx.fragment.app.viewModels
 import coil.load
 import com.google.android.material.tabs.TabLayoutMediator
@@ -16,12 +18,24 @@ import com.lugmana_andres.appdispo2.ui.core.ManageUIStates
 import com.lugmana_andres.appdispo2.ui.entity.perfil.BannerInfoJugadorUI
 import com.lugmana_andres.appdispo2.ui.viewModels.main.BannerJugadorVM
 
-class PerfilFragment : Fragment() {
+class PerfilFragment() : Fragment() {
 
+    private var tagPrincipal = "#2U20LR9U8"
     private lateinit var binding : FragmentPerfilBinding
     private val bannerJugadorVM : BannerJugadorVM by viewModels()
     private lateinit var manageUIStates: ManageUIStates
 
+    companion object {
+        private const val ARG_TAG_APTA = "tag_apta"
+
+        fun newInstance(tagApta: String): PerfilFragment {
+            val fragment = PerfilFragment()
+            val args = Bundle()
+            args.putString(ARG_TAG_APTA, tagApta)
+            fragment.arguments = args
+            return fragment
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,9 +51,12 @@ class PerfilFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        arguments?.let {
+            tagPrincipal = it.getString(ARG_TAG_APTA).toString()
+        }
         initVariables()
         initObservers()
+        initListeners()
         initData()
         setupViewPagerAndTabs()
     }
@@ -49,12 +66,16 @@ class PerfilFragment : Fragment() {
     }
 
     private fun render(item : BannerInfoJugadorUI) {
-
+        binding.txtTag.text = item.tagJugador
         binding.txtNameJugador.text = item.nombreJugador
         binding.txtNivel.text = item.nivelJugadir.toString()
         binding.txtClanNom.text = item.nombreClan
         binding.txtRolClan.text = item.rolClan
         binding.imagePerfil.load(item.imagen)
+    }
+
+    private fun initListeners(){
+
     }
 
     private fun initObservers() {
@@ -68,13 +89,13 @@ class PerfilFragment : Fragment() {
     }
 
     private fun initData() {
-        bannerJugadorVM.initData("#2U20LR9U8")
+        bannerJugadorVM.initData(tagPrincipal)
 
         Log.d("TAG", "Iniciando datos")
     }
 
     private fun setupViewPagerAndTabs() {
-        val viewPagerAdapter = ViewPagerAdapter(requireActivity())
+        val viewPagerAdapter = ViewPagerAdapter(requireActivity(),tagPrincipal)
         binding.lytEstadisticas.adapter = viewPagerAdapter
 
         TabLayoutMediator(binding.tabLayout, binding.lytEstadisticas) { tab, position ->

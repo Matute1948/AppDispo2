@@ -25,11 +25,11 @@ object RetrofitBase {
             .build()
     }
     //Api tops players
-    fun returnBaseRetrofitClashClan(param : String): Retrofit{
+    fun returnBaseRetrofitClashTops(): Retrofit{
         return Retrofit.Builder()
             .baseUrl("https://api.clashroyale.com/v1/")
             .addConverterFactory(GsonConverterFactory.create())
-            .client(a (param))
+            .client(apiClienteClashTop())
             .build()
     }
 

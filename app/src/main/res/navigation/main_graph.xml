@@ -30,9 +30,9 @@
         tools:layout="@layout/fragment_informacion" />
     <fragment
         android:id="@+id/listaAllCartasFragment"
-        android:name="com.lugmana_andres.appdispo2.ui.fragments.main.tops.ListaAllCartasFragment"
+        android:name="com.lugmana_andres.appdispo2.ui.fragments.main.tops.TopsFragment"
         android:label="fragment_lista_all_cartas"
-        tools:layout="@layout/fragment_lista_all_cartas" >
+        tools:layout="@layout/fragment_tops" >
         <action
             android:id="@+id/action_listaAllCartasFragment_to_clanesFragment"
             app:destination="@id/clanesFragment" />

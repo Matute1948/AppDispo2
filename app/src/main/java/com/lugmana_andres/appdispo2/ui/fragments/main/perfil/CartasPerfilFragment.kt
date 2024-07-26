@@ -7,17 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.lugmana_andres.appdispo2.R
 import com.lugmana_andres.appdispo2.databinding.FragmentCartasPerfilBinding
-import com.lugmana_andres.appdispo2.databinding.FragmentListaAllCartasBinding
-import com.lugmana_andres.appdispo2.databinding.ItemCaminosPerfilBinding
 import com.lugmana_andres.appdispo2.ui.adapter.perfil.ListaCartasJugadorAdapter
-import com.lugmana_andres.appdispo2.ui.adapter.perfil.adapterAux.CicloCofresAdapter
 import com.lugmana_andres.appdispo2.ui.core.ManageUIStates
 import com.lugmana_andres.appdispo2.ui.viewModels.main.CartasJugadorVM
 
-class CartasPerfilFragment : Fragment() {
+class CartasPerfilFragment(var tagAdpa : String) : Fragment() {
+
 
     private lateinit var binding: FragmentCartasPerfilBinding
     private lateinit var adapter: ListaCartasJugadorAdapter
@@ -75,7 +72,7 @@ class CartasPerfilFragment : Fragment() {
     }
 
     private fun initData() {
-        cartasJugadorVM.initData("#2U20LR9U8")
+        cartasJugadorVM.initData(tagAdpa)
     }
 
 }

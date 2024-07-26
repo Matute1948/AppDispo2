@@ -7,6 +7,6 @@ import retrofit2.http.Path
 
 interface TopsForSeasonEndPoint {
     @GET("locations/global/pathoflegend/{seasonId}/rankings/players")
-    suspend fun getTopsForLocation(@Path("seasonId") seasonId : String): Response<TopsForSeasonApi>
+    suspend fun getTopsForSeason(@Path("seasonId") seasonId : String): Response<TopsForSeasonApi>
 
 }

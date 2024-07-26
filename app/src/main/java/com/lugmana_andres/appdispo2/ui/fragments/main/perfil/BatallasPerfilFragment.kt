@@ -6,16 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lugmana_andres.appdispo2.R
 import com.lugmana_andres.appdispo2.databinding.FragmentBatallasPerfilBinding
 import com.lugmana_andres.appdispo2.ui.adapter.perfil.BatallasJugadorAdapter
-import com.lugmana_andres.appdispo2.ui.adapter.perfil.ListaCartasJugadorAdapter
 import com.lugmana_andres.appdispo2.ui.core.ManageUIStates
 import com.lugmana_andres.appdispo2.ui.viewModels.main.BatallasJugadorVM
 
-class BatallasPerfilFragment : Fragment() {
+class BatallasPerfilFragment(var tagAdpa : String) : Fragment() {
 
     private lateinit var binding: FragmentBatallasPerfilBinding
     private lateinit var adapter: BatallasJugadorAdapter
@@ -65,7 +63,7 @@ class BatallasPerfilFragment : Fragment() {
 
 
     private fun initData() {
-        batallasJugadorVM.initData("#2U20LR9U8")
+        batallasJugadorVM.initData(tagAdpa)
     }
 
 

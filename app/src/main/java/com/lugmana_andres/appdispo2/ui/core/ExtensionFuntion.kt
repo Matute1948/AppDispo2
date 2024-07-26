@@ -16,6 +16,7 @@ import com.lugmana_andres.appdispo2.ui.entity.perfil.InsigniaUI
 import com.lugmana_andres.appdispo2.ui.entity.perfil.JugadorPerfilUI
 import com.lugmana_andres.appdispo2.ui.entity.perfil.MazoUsualUI
 import com.lugmana_andres.appdispo2.ui.entity.perfil.RivalPerfilUI
+import com.lugmana_andres.appdispo2.ui.entity.tops.TopsUI
 
 
 fun Card.toCartasUI() = MazoUsualUI (
@@ -114,4 +115,20 @@ fun Member.toMiembroUI() = MiembroUI(
         donaMiem = this.donations,
         trofeosMiem = this.trophies,
         clanRankMiem = this.clanRank
+)
+
+fun com.lugmana_andres.appdispo2.data.network.entities.topsForLocation.Item.toTopsUILocation() = TopsUI(
+        nombreTop = this.name,
+        tagTop = this.tag,
+        rankgTop = this.eloRating,
+        ligaTop = this.rank,
+        nomClanTop = ""
+)
+
+fun com.lugmana_andres.appdispo2.data.network.entities.topsForSeason.Item.toTopsUISeason() = TopsUI(
+        nombreTop = this.name,
+        tagTop = this.tag,
+        rankgTop = this.eloRating,
+        ligaTop = this.rank,
+        nomClanTop =""
 )

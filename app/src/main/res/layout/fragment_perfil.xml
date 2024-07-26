@@ -18,13 +18,39 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <!-- Imagen de fondo -->
+            <ImageView
+                android:id="@+id/backgroundImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/estan_1"
+                android:alpha="0.9"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/negroTrans"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/txtNameJugador"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="56dp"
-                android:text="TextView"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/especial_text_color"
+                android:text="Nombre"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.116"
                 app:layout_constraintStart_toStartOf="parent"
@@ -34,8 +60,10 @@
                 android:id="@+id/txtClanNom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="TextView"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/white"
+                android:text="Clan"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.116"
                 app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +74,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="TextView"
+                android:text="miembro"
+                android:textSize="13sp"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.116"
                 app:layout_constraintStart_toStartOf="parent"
@@ -55,23 +85,35 @@
             <ImageView
                 android:id="@+id/imagePerfil"
                 android:layout_width="111dp"
-                android:layout_height="109dp"
-                android:layout_marginEnd="24dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0"
                 tools:src="@tools:sample/avatars" />
 
-            <EditText
+            <TextView
                 android:id="@+id/txtTag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="#2U20LR9U8"
-                android:inputType="text"
+                android:layout_marginTop="10dp"
+                android:text="#2GQWF452"
+                android:textSize="15dp"
+                android:background="@drawable/borde_search"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="31dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="48dp"
+                android:src="@drawable/experience"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.593"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -80,10 +122,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="56dp"
-                android:text="TextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.161"
-                app:layout_constraintStart_toEndOf="@+id/txtNameJugador"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/backgroundImage"
+                app:layout_constraintHorizontal_bias="0.589"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

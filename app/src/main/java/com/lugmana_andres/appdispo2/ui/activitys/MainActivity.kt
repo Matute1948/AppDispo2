@@ -6,8 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import com.lugmana_andres.appdispo2.R
 import com.lugmana_andres.appdispo2.databinding.ActivityMainBinding
-import com.lugmana_andres.appdispo2.ui.fragments.main.tops.ListaAllCartasFragment
+import com.lugmana_andres.appdispo2.ui.fragments.main.tops.TopsFragment
 import com.lugmana_andres.appdispo2.ui.fragments.main.clanes.ClanesFragment
+import com.lugmana_andres.appdispo2.ui.fragments.main.home.HomeFragment
 import com.lugmana_andres.appdispo2.ui.fragments.main.perfil.PerfilFragment
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         // Cargar el fragmento inicial
         supportFragmentManager.beginTransaction()
-            .replace(binding.containerFragments.id, PerfilFragment())
+            .replace(binding.containerFragments.id, HomeFragment())
             .commit()
 
         // Configura los Insets para el BottomNavigationView
@@ -45,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.item_2_cartas -> {
                     val x = supportFragmentManager.beginTransaction()
-                    x.replace(binding.containerFragments.id, ListaAllCartasFragment())
+                    x.replace(binding.containerFragments.id, TopsFragment())
                     x.commit()
                     true
                 }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/option8Pais"
+        android:title="Argentina"/>
+    <item
+        android:id="@+id/option9Pais"
+        android:title="Australia"/>
+    <item
+        android:id="@+id/option10Pais"
+        android:title="Bolivía"/>
+    <item
+        android:id="@+id/option11Pais"
+        android:title="Brasil"/>
+    <item
+        android:id="@+id/option12Pais"
+        android:title="Canada"/>
+    <item
+        android:id="@+id/option13Pais"
+        android:title="Chile"/>
+    <item
+        android:id="@+id/option14Pais"
+        android:title="China"/>
+    <item
+        android:id="@+id/option15Pais"
+        android:title="Colombia"/>
+    <item
+        android:id="@+id/option16Pais"
+        android:title="Costa Rica"/>
+    <item
+        android:id="@+id/option17Pais"
+        android:title="Ecuador"/>
+    <item
+        android:id="@+id/option18Pais"
+        android:title="El Salvador"/>
+    <item
+        android:id="@+id/option19Pais"
+        android:title="Francia"/>
+    <item
+        android:id="@+id/option21Pais"
+        android:title="Paraguay"/>
+    <item
+        android:id="@+id/option22Pais"
+        android:title="Peru"/>
+    <item
+        android:id="@+id/option23Pais"
+        android:title="Rusia"/>
+    <item
+        android:id="@+id/option24Pais"
+        android:title="España"/>
+    <item
+        android:id="@+id/option25Pais"
+        android:title="Estados Unidos"/>
+    <item
+        android:id="@+id/option26Pais"
+        android:title="Mexico"/>
+</menu>
