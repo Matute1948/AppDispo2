@@ -30,11 +30,11 @@ import kotlinx.coroutines.launch
 
 class RegisterFragment : Fragment() {
 
+    private lateinit var auth: FirebaseAuth
+
     private lateinit var binding : FragmentRegisterBinding
     private val registerFragmentVM : RegisterFragmentVM by viewModels()
     private lateinit var managerUIStates: ManageUIStates
-
-    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,42 +63,76 @@ class RegisterFragment : Fragment() {
     private fun initObservers() {
         registerFragmentVM.uiState.observe(viewLifecycleOwner) { state ->
             managerUIStates.invoke(state)
+
+            if (state is UIStates.Success) {
+                Log.d(TAG, "Usuario creado con éxito")
+                showUserCreatedDialog()
+            } else if (state is UIStates.Error) {
+                Log.d(TAG, "Error al crear usuario: ${state.message}")
+
+            }
         }
 
     }
 
+
     private fun initListeners() {
-        //poner el boton back
+
         binding.btnBack.setOnClickListener{
             findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
         }
         binding.btnRegister.setOnClickListener{
 
-            auth.createUserWithEmailAndPassword(
-                binding.txtNewUser.text.toString(),
-                binding.txtNewPass.text.toString()
-            )
-                .addOnCompleteListener(requireActivity()) { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "createUserWithEmail:success")
-                        val user = auth.currentUser
-                        
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                        Toast.makeText(
-                            requireActivity(),
-                            "Authentication failed.",
-                            Toast.LENGTH_SHORT,
-                        ).show()
-                    }
-                }
+            validateAndShowDialog()
         }
 
-
-        //poner el boton save
     }
+
+    private fun validateAndShowDialog() {
+        val newUser = binding.txtNewUser.text.toString()
+        val newPass = binding.txtNewPass.text.toString()
+        val newPassRep = binding.txtNewPassRep.text.toString()
+
+        if (newUser.isEmpty() || newPass.isEmpty() || newPassRep.isEmpty()) {
+            // Mostrar Snackbar si alguno de los campos está vacío
+            Snackbar.make(binding.root, "Ingrese o verifique sus datos", Snackbar.LENGTH_SHORT).show()
+        } else if (newPass != newPassRep) {
+            // Mostrar Snackbar si las contraseñas no coinciden
+            Snackbar.make(binding.root, "Las contraseñas no coinciden", Snackbar.LENGTH_SHORT).show()
+        } else {
+
+            showConfirmationDialog(newUser, newPass)
+        }
+    }
+
+    private fun showConfirmationDialog(newUser: String, newPass: String) {
+        MaterialAlertDialogBuilder(requireActivity())
+            .setTitle("Aviso")
+            .setMessage("¿Está usted seguro de enviar esta información?")
+            .setPositiveButton("Sí") { dialog, id ->
+                registerFragmentVM.createFirebaseUser(newUser, newPass)
+                dialog.dismiss()
+            }
+            .setNegativeButton("No") { dialog, id ->
+                dialog.cancel()
+            }
+            .show()
+    }
+    private fun showUserCreatedDialog() {
+        MaterialAlertDialogBuilder(requireActivity())
+            .setTitle("Usuario creado")
+            .setMessage("El usuario ha sido creado exitosamente.")
+            .setPositiveButton("OK") { dialog, _ ->
+                // Limpiar los campos de texto
+                binding.txtNewUser.text.clear()
+                binding.txtNewPass.text.clear()
+                binding.txtNewPassRep.text.clear()
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+
 
     private fun createLocalUser() {
         MaterialAlertDialogBuilder(requireActivity())//aqui van los estilos del alertdialog)

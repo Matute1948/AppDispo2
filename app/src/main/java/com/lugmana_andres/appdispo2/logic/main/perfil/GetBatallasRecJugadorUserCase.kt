@@ -17,7 +17,7 @@ class GetBatallasRecJugadorUserCase {
             .create(BatJugadorEndPoint::class.java)
             .getBatallasJugador(playerTag)
         if (response.isSuccessful){
-            val x = response.body()
+            val x = response.body()?.take(4)
             var items = ArrayList<BatallasJugadorUI>()
             x?.forEach {
                 items.add(it.toBatallasJugadorUI())

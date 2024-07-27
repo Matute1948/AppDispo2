@@ -8,7 +8,10 @@
     <color name="playerBackground">#E0F7FA</color>
     <color name="rivalBackground">#FFEBEE</color>
     <color name="listado">#C8C3C4</color>
-    <color name="negroTrans">#A6000000</color>
+    <color name="negroTrans">#B3000000</color>
+    <color name="bottom_nav">#404b5f</color>
+    <color name="botones">#036BC5</color>
+    <color name="colorCard">#FCF2E6D6</color>
 
     <color name="color_mostaza">#FFD700</color>
     <color name="color_plomo">#949494</color>

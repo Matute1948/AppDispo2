@@ -6,10 +6,11 @@
     </style>
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenAnimatedIcon">@drawable/gwen</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_v2</item>
         <item name="windowSplashScreenAnimationDuration">8000</item>
-        <item name="windowSplashScreenBackground">@color/black</item>
+        <item name="windowSplashScreenBackground">@color/white</item>
         <item name="postSplashScreenTheme">@style/Theme.AppDispo2</item>
+
     </style>
 
     <style name="Theme.AppDispo2" parent="Base.Theme.AppDispo2" />

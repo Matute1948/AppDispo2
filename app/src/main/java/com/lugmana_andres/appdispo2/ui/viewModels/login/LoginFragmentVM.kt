@@ -1,6 +1,7 @@
 package com.lugmana_andres.appdispo2.ui.viewModels.login
 
 import android.content.Context
+import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,10 +14,9 @@ import kotlinx.coroutines.launch
 
 class LoginFragmentVM : ViewModel() {
 
-    private var authGlobal : FirebaseAuth? = null
-    private lateinit var contextGlobal : FragmentActivity
     var uiState = MutableLiveData<UIStates>()
     var idUser = MutableLiveData<Int>()
+
     fun getUserFromDB(name:String, pass:String, context : Context){
 
         viewModelScope.launch {
@@ -38,9 +38,37 @@ class LoginFragmentVM : ViewModel() {
         }
     }
 
-    private fun initGlobalVar(auth: FirebaseAuth, context : FragmentActivity){
-        authGlobal = auth
-        contextGlobal = context
+    fun authWithFirebase(
+        email: String,
+        password: String,
+        auth: FirebaseAuth,
+        context: FragmentActivity
+    ) {
+        viewModelScope.launch {
+            uiState.postValue(UIStates.Loading(true))
+            auth.signInWithEmailAndPassword(
+                email, password
+            )
+                .addOnCompleteListener(context) { task ->
+                    if (task.isSuccessful) {
+                        uiState.postValue(
+                            UIStates.Success(
+                                true
+                            )
+                        )
+
+                    } else {
+                        Log.w("TAG", "signInWithEmail:failure", task.exception)
+                        uiState.postValue(
+                            UIStates.Error(
+                                task.exception?.message.toString()
+                            )
+                        )
+                    }
+                }
+            delay(500)
+            uiState.postValue(UIStates.Loading(false))
+        }
     }
 
 

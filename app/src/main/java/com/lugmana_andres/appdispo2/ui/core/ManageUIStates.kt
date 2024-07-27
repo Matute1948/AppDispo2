@@ -6,7 +6,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ManageUIStates(
     private val context : Context,
-    private val view : View) {
+    private val view : View
+) {
     fun invoke(state : UIStates){
         when(state){
             is UIStates.Loading -> {
@@ -24,7 +25,7 @@ class ManageUIStates(
                     .setMessage(state.message)
                     .setPositiveButton("Aceptar") { dialog, id ->
                         dialog.dismiss()
-                    }
+                    }.show()
             }
             is UIStates.Success -> {
                 MaterialAlertDialogBuilder(context)//aqui van los estilos del alertdialog)

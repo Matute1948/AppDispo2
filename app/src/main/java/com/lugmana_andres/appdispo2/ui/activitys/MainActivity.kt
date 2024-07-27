@@ -2,6 +2,7 @@ package com.lugmana_andres.appdispo2.ui.activitys
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import com.lugmana_andres.appdispo2.R
@@ -10,10 +11,12 @@ import com.lugmana_andres.appdispo2.ui.fragments.main.tops.TopsFragment
 import com.lugmana_andres.appdispo2.ui.fragments.main.clanes.ClanesFragment
 import com.lugmana_andres.appdispo2.ui.fragments.main.home.HomeFragment
 import com.lugmana_andres.appdispo2.ui.fragments.main.perfil.PerfilFragment
+import com.lugmana_andres.appdispo2.ui.viewModels.main.SharedVM
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val sharedViewModel: SharedVM by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initListeners()
+
+        sharedViewModel.setTagPrincipal("#2U20LR9U8")
 
         // Cargar el fragmento inicial
         supportFragmentManager.beginTransaction()

@@ -3,16 +3,16 @@
     <item
         android:id="@+id/item_1_perfil"
         android:enabled="true"
-        android:icon="@drawable/swipe_right_alt_24px"
+        android:icon="@drawable/person_24px"
         android:title="@string/text_Perfil"/>
     <item
         android:id="@+id/item_2_cartas"
         android:enabled="true"
-        android:icon="@drawable/swipe_left_alt_24px"
+        android:icon="@drawable/call_missed_outgoing_24px"
         android:title="@string/text_Tops"/>
     <item
         android:id="@+id/item_3_clanes"
         android:enabled="true"
-        android:icon="@drawable/swipe_down_alt_24px"
+        android:icon="@drawable/swords_24px"
         android:title="@string/text_Clanes"/>
 </menu>

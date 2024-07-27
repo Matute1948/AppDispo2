@@ -17,7 +17,31 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        style="@style/CustomCardStyle">
+
+        <ImageView
+            android:id="@+id/backgroundImage"
+            android:layout_width="match_parent"
+            android:layout_height="126dp"
+            android:alpha="0.9"
+            android:scaleType="centerCrop"
+            android:src="@drawable/fondo_clan"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="128dp"
+            android:background="@color/negroTrans"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,29 +69,34 @@
                     android:layout_marginTop="8dp"
                     android:text="Nombre Clan"
                     android:textSize="16sp"
+                    android:textColor="@color/especial_text_color"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtTagClan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
                     android:text="Tag" />
 
                 <TextView
                     android:id="@+id/txtPaisClan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
                     android:text="Pais" />
 
                 <TextView
                     android:id="@+id/txtTipoClan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
                     android:text="tipo" />
                 <TextView
                     android:id="@+id/txtDonaciones"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
                     android:text="tipo" />
             </LinearLayout>
 
@@ -88,6 +117,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="000"
+                        android:textColor="@color/white"
                         android:layout_marginVertical="12dp"
                         android:textStyle="bold"
                         android:gravity="end"
@@ -112,6 +142,7 @@
                         android:layout_marginVertical="12dp"
                         android:textStyle="bold"
                         android:gravity="end"
+                        android:textColor="@color/white"
                         android:layout_gravity="center_vertical|end"/>
 
                     <ImageView
@@ -126,12 +157,17 @@
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Miembros"
+        android:textStyle="bold"
+        android:textSize="15sp"/>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="10dp"
-        app:cardCornerRadius="10dp">
+        style="@style/CustomCardStyle">
         <!-- RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

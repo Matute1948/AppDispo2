@@ -7,13 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.fragment.app.activityViewModels
 import com.lugmana_andres.appdispo2.R
 import com.lugmana_andres.appdispo2.databinding.FragmentHomeBinding
 import com.lugmana_andres.appdispo2.ui.fragments.main.perfil.PerfilFragment
+import com.lugmana_andres.appdispo2.ui.viewModels.main.SharedVM
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
+    private val sharedViewModel: SharedVM by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,25 +36,25 @@ class HomeFragment : Fragment() {
     private fun initListenrs() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                // Aquí puedes manejar el texto ingresado
-                openAnotherFragment("$query")
-                Log.d("SearchQuery", "Texto ingresado: $query")
-                // Puedes hacer algo con el texto, como iniciar una búsqueda o actualizar la UI
-                return true // Devuelve true si el query ha sido manejado
+                query?.let {
+                    sharedViewModel.setTagPrincipal(it)
+                    openAnotherFragment()
+                    Log.d("SearchQuery", "Texto ingresado: $query")
+                }
+                return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                // Aquí puedes manejar los cambios en el texto mientras el usuario escribe
                 return false
             }
         })
     }
 
-    private fun openAnotherFragment(tag : String) {
-        val anotherFragment = PerfilFragment.newInstance(tag ?: "")
+    private fun openAnotherFragment() {
+        val anotherFragment = PerfilFragment()
         parentFragmentManager.beginTransaction()
-            .replace(R.id.containerFragments, anotherFragment) // Asegúrate de que R.id.fragment_container sea el ID del contenedor de tu fragmento
-            .addToBackStack(null) // Esto es opcional, añade la transacción al back stack para permitir la navegación hacia atrás
+            .replace(R.id.containerFragments, anotherFragment)
+            .addToBackStack(null)
             .commit()
     }
 

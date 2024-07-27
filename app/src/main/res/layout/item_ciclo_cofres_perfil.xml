@@ -16,7 +16,8 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        style="@style/CustomCardStyle">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcCicloCofres"

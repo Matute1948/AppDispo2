@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.fragment.app.activityViewModels
 
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import coil.load
 import com.google.android.material.tabs.TabLayoutMediator
 import com.lugmana_andres.appdispo2.R
@@ -16,26 +19,18 @@ import com.lugmana_andres.appdispo2.databinding.FragmentPerfilBinding
 import com.lugmana_andres.appdispo2.ui.adapter.perfil.adapterAux.ViewPagerAdapter
 import com.lugmana_andres.appdispo2.ui.core.ManageUIStates
 import com.lugmana_andres.appdispo2.ui.entity.perfil.BannerInfoJugadorUI
+import com.lugmana_andres.appdispo2.ui.fragments.main.home.HomeFragment
+import com.lugmana_andres.appdispo2.ui.fragments.main.home.HomeFragmentDirections
 import com.lugmana_andres.appdispo2.ui.viewModels.main.BannerJugadorVM
+import com.lugmana_andres.appdispo2.ui.viewModels.main.SharedVM
 
 class PerfilFragment() : Fragment() {
 
-    private var tagPrincipal = "#2U20LR9U8"
+    private val sharedViewModel: SharedVM by activityViewModels()
     private lateinit var binding : FragmentPerfilBinding
     private val bannerJugadorVM : BannerJugadorVM by viewModels()
     private lateinit var manageUIStates: ManageUIStates
 
-    companion object {
-        private const val ARG_TAG_APTA = "tag_apta"
-
-        fun newInstance(tagApta: String): PerfilFragment {
-            val fragment = PerfilFragment()
-            val args = Bundle()
-            args.putString(ARG_TAG_APTA, tagApta)
-            fragment.arguments = args
-            return fragment
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,9 +46,6 @@ class PerfilFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arguments?.let {
-            tagPrincipal = it.getString(ARG_TAG_APTA).toString()
-        }
         initVariables()
         initObservers()
         initListeners()
@@ -75,10 +67,18 @@ class PerfilFragment() : Fragment() {
     }
 
     private fun initListeners(){
-
+        binding.imageButton.setOnClickListener {
+            openAnotherFragment()
+        }
     }
 
     private fun initObservers() {
+        sharedViewModel.tagPrincipal.observe(viewLifecycleOwner){ tag ->
+            tag?.let {
+                bannerJugadorVM.initData(it)
+                Log.d("PerfilFragment", "Tag principal actualizado: $it")
+            }
+        }
 
         bannerJugadorVM.uiState.observe(viewLifecycleOwner) {
             manageUIStates.invoke(it)
@@ -89,14 +89,20 @@ class PerfilFragment() : Fragment() {
     }
 
     private fun initData() {
-        bannerJugadorVM.initData(tagPrincipal)
-
-        Log.d("TAG", "Iniciando datos")
+//        sharedViewModel.tagPrincipal.value?.let { tag ->
+//            bannerJugadorVM.initData(tag)
+//        }
+//        Log.d("TAG", "Iniciando datos")
     }
 
     private fun setupViewPagerAndTabs() {
-        val viewPagerAdapter = ViewPagerAdapter(requireActivity(),tagPrincipal)
-        binding.lytEstadisticas.adapter = viewPagerAdapter
+
+        sharedViewModel.tagPrincipal.value?.let { tag ->
+            val viewPagerAdapter = ViewPagerAdapter(requireActivity(), tag)
+            binding.lytEstadisticas.adapter = viewPagerAdapter
+        }
+
+
 
         TabLayoutMediator(binding.tabLayout, binding.lytEstadisticas) { tab, position ->
             tab.text = when (position) {
@@ -106,5 +112,12 @@ class PerfilFragment() : Fragment() {
                 else -> throw IllegalStateException("Unexpected position $position")
             }
         }.attach()
+    }
+    private fun openAnotherFragment() {
+        val anotherFragment = HomeFragment()
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.containerFragments, anotherFragment)
+            .addToBackStack(null)
+            .commit()
     }
 }

@@ -12,27 +12,23 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.lugmana_andres.appdispo2.R
 import com.lugmana_andres.appdispo2.databinding.FragmentLoginBinding
-import com.lugmana_andres.appdispo2.databinding.FragmentRecoveryBinding
 import com.lugmana_andres.appdispo2.ui.activitys.MainActivity
 import com.lugmana_andres.appdispo2.ui.core.ManageUIStates
+import com.lugmana_andres.appdispo2.ui.core.UIStates
 import com.lugmana_andres.appdispo2.ui.viewModels.login.LoginFragmentVM
 import kotlinx.coroutines.launch
-import java.util.concurrent.Executor
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding : FragmentLoginBinding
     private lateinit var managerUIState : ManageUIStates
     private val loginFragmentVM : LoginFragmentVM by viewModels()
-    private lateinit var executor: Executor
-    private lateinit var biometricPrompt: BiometricPrompt
-    private lateinit var promptInfo: BiometricPrompt.PromptInfo
-    private lateinit var biometricManager: BiometricManager
 
     private lateinit var auth: FirebaseAuth
 
@@ -62,22 +58,15 @@ class LoginFragment : Fragment() {
         )
         // Initialize Firebase Auth
         auth = Firebase.auth
-
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            startActivity(
-                Intent(
-                    requireActivity(),
-                    MainActivity::class.java
-                )
-            )
-        }
     }
 
     private fun initObservers() {
-        loginFragmentVM.uiState.observe(viewLifecycleOwner){ state ->
-            managerUIState.invoke(state)
-
+        loginFragmentVM.uiState.observe(viewLifecycleOwner) { state ->
+            if (state is UIStates.Success) {
+                startActivity(Intent(requireActivity(), MainActivity::class.java))
+            } else {
+                managerUIState.invoke(state)
+            }
         }
 
         loginFragmentVM.idUser.observe(viewLifecycleOwner){ id ->
@@ -92,14 +81,21 @@ class LoginFragment : Fragment() {
     }
 
     private fun initListeners() {
-        binding.btnIngresar.setOnClickListener{
-            lifecycleScope.launch {
-                loginFragmentVM.getUserFromDB(
-                    binding.txtUsario.text.toString(),
-                    binding.txtPass.text.toString(),
-                    requireContext())
+        binding.btnIngresar.setOnClickListener {
+            val username = binding.txtUsario.text.toString()
+            val password = binding.txtPass.text.toString()
+
+            if (username.isEmpty() || password.isEmpty()) {
+                // Mostrar Snackbar si los campos están vacíos
+                Snackbar.make(binding.root, "Ingrese o verifique sus datos", Snackbar.LENGTH_SHORT).show()
+            } else {
+                // Si los campos no están vacíos, llamar a authWithFirebase
+                lifecycleScope.launch {
+                    loginFragmentVM.authWithFirebase(username, password, auth, requireActivity())
+                }
             }
         }
+
         binding.btnRegistrarse.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
         }
