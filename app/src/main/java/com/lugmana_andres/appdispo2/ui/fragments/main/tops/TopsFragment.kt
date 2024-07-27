@@ -1,5 +1,8 @@
 package com.lugmana_andres.appdispo2.ui.fragments.main.tops
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +10,8 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +19,7 @@ import com.lugmana_andres.appdispo2.R
 import com.lugmana_andres.appdispo2.databinding.FragmentTopsBinding
 import com.lugmana_andres.appdispo2.ui.adapter.tops.TopsAdapter
 import com.lugmana_andres.appdispo2.ui.core.ManageUIStates
+import com.lugmana_andres.appdispo2.ui.entity.tops.TopsUI
 import com.lugmana_andres.appdispo2.ui.viewModels.main.TopsVM
 
 class TopsFragment : Fragment() {
@@ -44,7 +50,7 @@ class TopsFragment : Fragment() {
     }
     private fun initVariables() {
         managerUIStates = ManageUIStates(requireActivity(), binding.lytLoading.mainLayout)
-        adapter = TopsAdapter()
+        adapter = TopsAdapter { topsUI -> onPlayerClicked(topsUI) }
         binding.rcTops.adapter = adapter
         binding.rcTops.layoutManager = LinearLayoutManager(
             requireActivity(),
@@ -263,4 +269,36 @@ class TopsFragment : Fragment() {
     private fun initData() {
         topsVM.initDataSeason("117")
     }
+
+    private fun onPlayerClicked(topsUI: TopsUI) {
+        showCopyDialog(topsUI)
+    }
+
+    private fun showCopyDialog(topsUI: TopsUI) {
+        // Crear el diálogo
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Copiar Tag")
+        builder.setMessage("Deseas copiar el tag: ${topsUI.tagTop}?")
+
+        builder.setPositiveButton("Aceptar") { dialog, _ ->
+            copyToClipboard(topsUI.tagTop)
+            Toast.makeText(requireContext(), "Tag copiado: ${topsUI.tagTop}", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
+
+        builder.setNegativeButton("Cancelar") { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        // Mostrar el diálogo
+        builder.create().show()
+    }
+
+    private fun copyToClipboard(tag: String) {
+        val clipboard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("Tag", tag)
+        clipboard.setPrimaryClip(clip)
+    }
+
+
 }

@@ -10,13 +10,14 @@ import com.lugmana_andres.appdispo2.R
 import com.lugmana_andres.appdispo2.databinding.ItemClanLocationBinding
 import com.lugmana_andres.appdispo2.ui.entity.tops.TopsUI
 
-class TopsAdapter :
+class TopsAdapter (private val onItemClicked: (TopsUI) -> Unit) :
     ListAdapter<TopsUI, TopsAdapter.TopsVH>(DiffUtilTopsCallBack){
-    class TopsVH(view : View) : RecyclerView.ViewHolder(view){
+    class TopsVH(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemClanLocationBinding.bind(view)
-        fun render(item : TopsUI){
-            binding.txtListClan.text = (position + 1).toString()
-            val backgroundColor = when (position) {
+
+        fun render(item: TopsUI, onItemClicked: (TopsUI) -> Unit) {
+            binding.txtListClan.text = (adapterPosition + 1).toString()
+            val backgroundColor = when (adapterPosition) {
                 0 -> R.color.color_mostaza
                 1 -> R.color.color_plomo
                 2 -> R.color.color_bronce
@@ -29,8 +30,9 @@ class TopsAdapter :
             binding.txtMiemClan.text = item.nomClanTop
             binding.txtTrofeosClan.text = item.rankgTop.toString()
 
+            // Manejar clic en el item
+            itemView.setOnClickListener { onItemClicked(item) }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopsVH {
@@ -46,7 +48,8 @@ class TopsAdapter :
 
     override fun onBindViewHolder(holder: TopsVH, position: Int) {
        holder.render(
-           getItem(position)
+           getItem(position),
+           onItemClicked
        )
     }
 
